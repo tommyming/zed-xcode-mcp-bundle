@@ -1,0 +1,14 @@
+[package]
+name = "xcode-mcp-bundle"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+authors = ["Tommy Han"]
+repository = "https://github.com/tommyming/zed-xcode-mcp-bundle"
+description = "Bundle Xcode 26.3+ mcpbridge and XcodeBuildMCP into one Zed extension."
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+zed_extension_api = "0.7.0"

@@ -1,0 +1,15 @@
+id = "xcode-mcp-bundle"
+name = "Xcode MCP Bundle"
+version = "0.1.0"
+schema_version = 1
+authors = ["Tommy Han"]
+description = "Bundle Xcode 26.3+ mcpbridge and XcodeBuildMCP into one Zed extension."
+repository = "https://github.com/tommyming/zed-xcode-mcp-bundle"
+
+[context_servers.xcode-mcp]
+name = "Xcode MCP"
+description = "Xcode 26.3+ MCP tools via xcrun mcpbridge"
+
+[context_servers.xcodebuildmcp]
+name = "XcodeBuildMCP"
+description = "XcodeBuildMCP via npx -y xcodebuildmcp@latest"

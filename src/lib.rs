@@ -66,7 +66,7 @@ impl zed::Extension for XcodeMcpBundle {
         let id = context_server_id.as_ref();
 
         match id {
-            "xcode-mcp" => {
+            "Xcode-MCP" => {
                 // Preflight check for xcode-mcp
                 if let Err(e) = self.check_xcode_mcpbridge() {
                     return Err(e);
@@ -78,7 +78,7 @@ impl zed::Extension for XcodeMcpBundle {
                     env: Vec::new(),
                 })
             }
-            "xcodebuildmcp" => {
+            "XcodeBuildMCP" => {
                 // Preflight check for xcodebuildmcp
                 if let Err(e) = self.check_npx() {
                     return Err(e);

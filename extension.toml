@@ -27,10 +27,10 @@ kind = "process:exec"
 command = "xcrun"
 args = ["--find", "mcpbridge"]
 
-[context_servers.xcode-mcp]
+[context_servers.Xcode-MCP]
 name = "Xcode MCP"
 description = "Xcode 26.3+ MCP tools via xcrun mcpbridge"
 
-[context_servers.xcodebuildmcp]
+[context_servers.XcodeBuildMCP]
 name = "XcodeBuildMCP"
 description = "XcodeBuildMCP via npx -y xcodebuildmcp@latest"

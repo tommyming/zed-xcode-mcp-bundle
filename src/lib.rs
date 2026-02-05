@@ -51,6 +51,14 @@ impl XcodeMcpBundle {
             )),
         }
     }
+
+    fn format_context_server_error(&self, id: &str, error: String) -> String {
+        let fallback = "Failed to start the context server. Check the prerequisites and try again.";
+        if error.trim().is_empty() {
+            return format!("{} ({})", fallback, id);
+        }
+        format!("{} ({})\n\nDetails: {}", fallback, id, error)
+    }
 }
 
 impl zed::Extension for XcodeMcpBundle {
@@ -69,7 +77,7 @@ impl zed::Extension for XcodeMcpBundle {
             "Xcode-MCP" => {
                 // Preflight check for xcode-mcp
                 if let Err(e) = self.check_xcode_mcpbridge() {
-                    return Err(e);
+                    return Err(self.format_context_server_error(id, e));
                 }
 
                 Ok(zed::Command {
@@ -81,10 +89,15 @@ impl zed::Extension for XcodeMcpBundle {
             "XcodeBuildMCP" => {
                 // Preflight check for xcodebuildmcp
                 if let Err(e) = self.check_npx() {
-                    return Err(e);
+                    return Err(self.format_context_server_error(id, e));
                 }
 
-                let node_path = zed::node_binary_path()?;
+                let node_path = zed::node_binary_path().map_err(|e| {
+                    self.format_context_server_error(
+                        id,
+                        format!("Failed to resolve Node.js binary path: {}", e),
+                    )
+                })?;
                 let npx_path = node_path.replace("/node", "/npx");
 
                 Ok(zed::Command {
@@ -93,7 +106,10 @@ impl zed::Extension for XcodeMcpBundle {
                     env: Vec::new(),
                 })
             }
-            _ => Err(format!("Unknown context server id: {}", id)),
+            _ => {
+                Err(self
+                    .format_context_server_error(id, format!("Unknown context server id: {}", id)))
+            }
         }
     }
 }

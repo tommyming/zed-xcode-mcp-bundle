@@ -84,8 +84,11 @@ impl zed::Extension for XcodeMcpBundle {
                     return Err(e);
                 }
 
+                let node_path = zed::node_binary_path()?;
+                let npx_path = node_path.replace("/node", "/npx");
+
                 Ok(zed::Command {
-                    command: "npx".to_string(),
+                    command: npx_path,
                     args: vec!["-y".to_string(), "xcodebuildmcp@latest".to_string()],
                     env: Vec::new(),
                 })

@@ -5,6 +5,8 @@ A Zed extension that bundles two MCP (Model Context Protocol) servers for Xcode 
 - **xcode-mcp**: Xcode 26.3+ MCP tools via `xcrun mcpbridge`
 - **xcodebuildmcp**: XcodeBuildMCP via `npx -y xcodebuildmcp@latest`
 
+This extension performs **automated preflight checks** to ensure all prerequisites are met before starting each context server, providing clear error messages if dependencies are missing.
+
 ## Installation
 
 Install this extension from the Zed marketplace or by adding it to your Zed configuration.
@@ -50,13 +52,13 @@ To use the `xcodebuildmcp` server:
 
 ## Error Messages and Troubleshooting
 
-This extension provides clear error messages when prerequisites are missing. Here's how to resolve common issues:
+This extension performs automated preflight checks before starting each context server. If a prerequisite is missing, you'll receive an immediate, clear error message. Here's how to resolve common issues:
 
 ### xcode-mcp Errors
 
 #### Error: "Xcode 26.3+ is required: `mcpbridge` was not found"
 
-**Cause**: You're using an older version of Xcode, or Xcode is not properly installed, or the wrong Xcode installation is selected.
+**Cause**: This error occurs during the extension's automated preflight check. You're using an older version of Xcode, or Xcode is not properly installed, or the wrong Xcode installation is selected.
 
 **Solution**:
 1. Verify Xcode 26.3+ is installed:
@@ -104,7 +106,7 @@ This extension provides clear error messages when prerequisites are missing. Her
 
 #### Error: "Node.js (npx) is required to run XcodeBuildMCP. Install Node.js and ensure `npx` is in PATH"
 
-**Cause**: Node.js is not installed, or `npx` is not available in your PATH.
+**Cause**: This error occurs during the extension's automated preflight check. Node.js is not installed, or `npx` is not available in your PATH.
 
 **Solution**:
 1. Install Node.js from [nodejs.org](https://nodejs.org/) (LTS version recommended)
@@ -216,6 +218,15 @@ You can create agent profiles in Zed's settings to quickly switch between server
 - Internet connection (for downloading via npx)
 
 ## Development
+
+### Preflight Checks
+
+The extension implements automated preflight checks that run before starting each context server:
+
+- **xcode-mcp**: Runs `xcrun --find mcpbridge` to verify Xcode 26.3+ is installed and accessible
+- **xcodebuildmcp**: Runs `npx --version` to verify Node.js and npx are available
+
+These checks provide immediate feedback if prerequisites are missing, saving you from debugging runtime errors.
 
 ### Building the Extension
 

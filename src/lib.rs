@@ -5,27 +5,51 @@ struct XcodeMcpBundle;
 impl XcodeMcpBundle {
     /// Check if xcrun mcpbridge is available (Xcode 26.3+)
     fn check_xcode_mcpbridge(&self) -> Result<(), String> {
-        // Note: In a real implementation, we would run `xcrun --find mcpbridge`
-        // The Zed extension API may or may not support subprocess execution in the current version
-        // For now, we'll document the expected behavior and let errors surface at runtime
+        let output = zed::Command::new("xcrun")
+            .arg("--find")
+            .arg("mcpbridge")
+            .output();
 
-        // If subprocess execution is available, implement:
-        // let result = run_command("xcrun", &["--find", "mcpbridge"]);
-        // if !result.success { return Err("..."); }
-
-        Ok(())
+        match output {
+            Ok(output) => {
+                if output.status == Some(0) && !output.stdout.is_empty() {
+                    Ok(())
+                } else {
+                    Err(format!(
+                        "Xcode 26.3+ is required: `mcpbridge` was not found. \
+                         Install/upgrade Xcode, then ensure the correct Xcode is selected via \
+                         `xcode-select -p` (or `sudo xcode-select -s /Applications/Xcode.app`)."
+                    ))
+                }
+            }
+            Err(e) => Err(format!(
+                "Failed to check for Xcode mcpbridge: {}. \
+                     Ensure Xcode 26.3+ is installed and selected via xcode-select.",
+                e
+            )),
+        }
     }
 
     /// Check if npx is available
     fn check_npx(&self) -> Result<(), String> {
-        // Note: In a real implementation, we would run `npx --version`
-        // or check for npx in PATH
+        let output = zed::Command::new("npx").arg("--version").output();
 
-        // If subprocess execution is available, implement:
-        // let result = run_command("npx", &["--version"]);
-        // if !result.success { return Err("..."); }
-
-        Ok(())
+        match output {
+            Ok(output) => {
+                if output.status == Some(0) {
+                    Ok(())
+                } else {
+                    Err("Node.js (npx) is required to run XcodeBuildMCP. \
+                         Install Node.js and ensure `npx` is in PATH."
+                        .to_string())
+                }
+            }
+            Err(e) => Err(format!(
+                "Failed to check for npx: {}. \
+                     Install Node.js and ensure `npx` is in PATH.",
+                e
+            )),
+        }
     }
 }
 

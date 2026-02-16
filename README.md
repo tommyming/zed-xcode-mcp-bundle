@@ -2,6 +2,9 @@
 
 A Zed extension that bundles two MCP (Model Context Protocol) servers for Xcode development:
 
+> [!WARNING]
+> Since Xcode 26.3 is still in RC stage, please do not use the mcp extension for now unless you got RC version installed.
+
 - **xcode-mcp**: Xcode 26.3+ MCP tools via `xcrun mcpbridge`
 - **xcodebuildmcp**: XcodeBuildMCP via `npx -y xcodebuildmcp@latest`
 

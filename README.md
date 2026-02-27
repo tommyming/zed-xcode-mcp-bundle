@@ -3,6 +3,7 @@
 A Zed extension that bundles two MCP (Model Context Protocol) servers for Xcode development:
 
 > [!NOTE]
+> Xcode MCP Sever is only available from macOS 26.
 > Xcode 26.3 is now released. Install Xcode 26.3+ and ensure it’s selected via `xcode-select` before enabling the MCP servers.
 > Make sure Xcode is opened and MCP Server is available before using through this extension.
 

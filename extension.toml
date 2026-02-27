@@ -1,6 +1,6 @@
 id = "xcode-mcp-bundle"
 name = "Xcode MCP Bundle"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["Tommy Han"]
 description = "Bundle Xcode 26.3+ mcpbridge and XcodeBuildMCP into one Zed extension."

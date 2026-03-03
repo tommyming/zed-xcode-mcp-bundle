@@ -102,7 +102,11 @@ impl zed::Extension for XcodeMcpBundle {
 
                 Ok(zed::Command {
                     command: npx_path,
-                    args: vec!["-y".to_string(), "xcodebuildmcp@latest".to_string()],
+                    args: vec![
+                        "-y".to_string(),
+                        "xcodebuildmcp@latest".to_string(),
+                        "mcp".to_string(),
+                    ],
                     env: Vec::new(),
                 })
             }

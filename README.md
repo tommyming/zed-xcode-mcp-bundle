@@ -8,7 +8,7 @@ A Zed extension that bundles two MCP (Model Context Protocol) servers for Xcode 
 > Make sure Xcode is opened and MCP Server is available before using through this extension.
 
 - **xcode-mcp**: Xcode 26.3+ MCP tools via `xcrun mcpbridge`
-- **xcodebuildmcp**: XcodeBuildMCP via `npx -y xcodebuildmcp@latest`
+- **xcodebuildmcp**: XcodeBuildMCP via `npx -y xcodebuildmcp@latest mcp`
 
 This extension performs **automated preflight checks** to ensure all prerequisites are met before starting each context server, providing clear error messages if dependencies are missing.
 
@@ -145,7 +145,7 @@ This extension performs automated preflight checks before starting each context 
 **Solutions**:
 1. Test `npx` manually to see the actual error:
    ```bash
-   npx -y xcodebuildmcp@latest
+   npx -y xcodebuildmcp@latest mcp
    ```
 
 2. Check your internet connection
@@ -179,7 +179,7 @@ This extension performs automated preflight checks before starting each context 
    xcrun mcpbridge
    
    # For xcodebuildmcp
-   npx -y xcodebuildmcp@latest
+   npx -y xcodebuildmcp@latest mcp
    ```
 
 3. If you find a bug or have an issue that's not covered here, please report it on GitHub:
